@@ -133,17 +133,17 @@ echo "VERBOSE_LOGS:         '${VERBOSE_LOGS}'"
 
 cleanup() {
     echo "Executing Find Statement: $1"
+    FILES_MARKED_FOR_DELETE=`eval $1`
     if [ "${VERBOSE_LOGS}" == "true" ];
     then
-	    FILES_MARKED_FOR_DELETE=`eval $1`
 	    echo "Process will be Deleting the following File(s)/Directory(s):"
 	    echo "${FILES_MARKED_FOR_DELETE}"
-	    echo "Process will be Deleting `echo "${FILES_MARKED_FOR_DELETE}" | \
-	    grep -v '^$' | wc -l` File(s)/Directory(s)"     \
-	    # "grep -v '^$'" - removes empty lines.
-	    # "wc -l" - Counts the number of lines
-	    echo ""
     fi
+    echo "Process will be Deleting `echo "${FILES_MARKED_FOR_DELETE}" | \
+    grep -v '^$' | wc -l` File(s)/Directory(s)"     \
+    # "grep -v '^$'" - removes empty lines.
+    # "wc -l" - Counts the number of lines
+    echo ""
     if [ "${ENABLE_DELETE}" == "true" ];
     then
         if [ "${FILES_MARKED_FOR_DELETE}" != "" ];
